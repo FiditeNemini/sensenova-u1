@@ -1,0 +1,1662 @@
+{
+  "id": "6e74ae7a-1fe6-4b80-991f-1e0efe583102",
+  "revision": 0,
+  "last_node_id": 26,
+  "last_link_id": 67,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "EmptyHiDreamO1LatentImage",
+      "pos": [
+        878.209479600559,
+        189.81465777934812
+      ],
+      "size": [
+        280,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyHiDreamO1LatentImage"
+      },
+      "widgets_values": [
+        1344,
+        2048,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1344,
+        "height": 2048,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        466.65283199685206,
+        79.65305592100319
+      ],
+      "size": [
+        330,
+        330
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "nova_editor_example.webp",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "nova_editor_example.webp",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 14,
+      "type": "PreviewAny",
+      "pos": [
+        1846.4076229588757,
+        -81.53261162975006
+      ],
+      "size": [
+        225,
+        0
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 12,
+      "type": "HiDreamO1ReferenceImages",
+      "pos": [
+        883.2251148076629,
+        28.26920531310296
+      ],
+      "size": [
+        225,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 63
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 64
+        },
+        {
+          "name": "images.image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 25
+        },
+        {
+          "name": "images.image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            26,
+            29
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HiDreamO1ReferenceImages"
+      }
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1209.849712873047,
+        43.19652083511212
+      ],
+      "size": [
+        310,
+        270
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 51
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 26
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 11
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 65
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 66
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            12,
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        50,
+        4,
+        "euler",
+        "simple",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "fixed",
+        "steps": 50,
+        "cfg": 4,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        1562.493736259966,
+        42.4062985865584
+      ],
+      "size": [
+        225,
+        70
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 12
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 13,
+      "type": "SenseNovaThinkingPreview",
+      "pos": [
+        1559.783154212991,
+        -110.65816761767539
+      ],
+      "size": [
+        232.46875,
+        74
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 29
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "thinking",
+          "type": "STRING",
+          "links": [
+            31
+          ]
+        },
+        {
+          "name": "token_ids",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SenseNovaThinkingPreview"
+      }
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [
+        1818.686105635188,
+        43.190594985660624
+      ],
+      "size": [
+        310,
+        302
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "SenseNova/edit"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "SenseNova/edit"
+      }
+    },
+    {
+      "id": 26,
+      "type": "96569286-8db1-49bb-a4a0-a5c5f4e5c4e8",
+      "pos": [
+        460.45962716457944,
+        -280.64863866650546
+      ],
+      "size": [
+        350.09375,
+        330
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Turbo",
+          "name": "value",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            49
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            50
+          ]
+        },
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            51
+          ]
+        },
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            63
+          ]
+        },
+        {
+          "name": "CONDITIONING_1",
+          "type": "CONDITIONING",
+          "links": [
+            64
+          ]
+        },
+        {
+          "label": "steps",
+          "name": "output",
+          "type": "INT",
+          "links": [
+            65
+          ]
+        },
+        {
+          "label": "cfg",
+          "name": "output_1",
+          "type": "FLOAT",
+          "links": [
+            66
+          ]
+        }
+      ],
+      "properties": {
+        "previewExposures": []
+      },
+      "widgets_values": [
+        "Change the jacket of the person on the left to bright yellow.",
+        "SenseNova-U1.5-8B-MoT-BF16-T8.safetensors",
+        false,
+        1024,
+        false
+      ],
+      "widgets_values_named": {
+        "text": "Change the jacket of the person on the left to bright yellow.",
+        "ckpt_name": "SenseNova-U1.5-8B-MoT-BF16-T8.safetensors",
+        "thinking": false,
+        "max_think_tokens": 1024,
+        "value": false
+      }
+    }
+  ],
+  "links": [
+    [
+      11,
+      7,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      12,
+      8,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      13,
+      9,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      3,
+      0,
+      12,
+      2,
+      "IMAGE"
+    ],
+    [
+      26,
+      12,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      12,
+      1,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      29,
+      12,
+      0,
+      13,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      30,
+      8,
+      0,
+      13,
+      2,
+      "LATENT"
+    ],
+    [
+      31,
+      13,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      26,
+      0,
+      13,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      26,
+      1,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      51,
+      26,
+      2,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      63,
+      26,
+      3,
+      12,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      64,
+      26,
+      4,
+      12,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      65,
+      26,
+      5,
+      8,
+      4,
+      "INT"
+    ],
+    [
+      66,
+      26,
+      6,
+      8,
+      5,
+      "FLOAT"
+    ]
+  ],
+  "groups": [],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "96569286-8db1-49bb-a4a0-a5c5f4e5c4e8",
+        "version": 1,
+        "state": {
+          "lastGroupId": 0,
+          "lastNodeId": 26,
+          "lastLinkId": 67,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "New Subgraph",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            -76.49380189552113,
+            -948.2696987213541,
+            148.08984375,
+            148
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            1301.9581923617352,
+            -998.2696987213541,
+            128,
+            188
+          ]
+        },
+        "inputs": [
+          {
+            "id": "4aa0cf60-99c6-4249-bb50-c12e9fa91b93",
+            "name": "text",
+            "type": "STRING",
+            "linkIds": [
+              60
+            ],
+            "pos": [
+              47.59604185447887,
+              -924.2696987213541
+            ]
+          },
+          {
+            "id": "32ba3819-e913-4980-8570-69bdc4edd72e",
+            "name": "ckpt_name",
+            "type": "COMBO",
+            "linkIds": [
+              55
+            ],
+            "pos": [
+              47.59604185447887,
+              -904.2696987213541
+            ]
+          },
+          {
+            "id": "83a9f88c-7cf3-4f6d-97a5-63a16280eb56",
+            "name": "thinking",
+            "type": "BOOLEAN",
+            "linkIds": [
+              56
+            ],
+            "pos": [
+              47.59604185447887,
+              -884.2696987213541
+            ]
+          },
+          {
+            "id": "0b8e6c12-7aeb-4121-9187-418529aeab2b",
+            "name": "max_think_tokens",
+            "type": "INT",
+            "linkIds": [
+              57
+            ],
+            "pos": [
+              47.59604185447887,
+              -864.2696987213541
+            ]
+          },
+          {
+            "id": "69dc01ca-a684-468c-bdec-7d1756da465e",
+            "name": "value",
+            "type": "BOOLEAN",
+            "linkIds": [
+              67
+            ],
+            "label": "Turbo",
+            "pos": [
+              47.59604185447887,
+              -844.2696987213541
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "id": "1061571a-10c7-4af4-8ead-afa2b704594b",
+            "name": "CLIP",
+            "type": "CLIP",
+            "linkIds": [
+              44
+            ],
+            "localized_name": "CLIP",
+            "pos": [
+              1325.9581923617352,
+              -974.2696987213541
+            ]
+          },
+          {
+            "id": "0a045146-1518-4ce9-8a8c-2d7968557524",
+            "name": "VAE",
+            "type": "VAE",
+            "linkIds": [
+              47
+            ],
+            "localized_name": "VAE",
+            "pos": [
+              1325.9581923617352,
+              -954.2696987213541
+            ]
+          },
+          {
+            "id": "eccdab92-9674-47c8-bca1-93cc5e405e41",
+            "name": "MODEL",
+            "type": "MODEL",
+            "linkIds": [
+              48
+            ],
+            "localized_name": "模型",
+            "pos": [
+              1325.9581923617352,
+              -934.2696987213541
+            ]
+          },
+          {
+            "id": "22ca1cf4-77d3-45f9-9e1b-ba5769995ff4",
+            "name": "CONDITIONING",
+            "type": "CONDITIONING",
+            "linkIds": [
+              61
+            ],
+            "localized_name": "条件",
+            "pos": [
+              1325.9581923617352,
+              -914.2696987213541
+            ]
+          },
+          {
+            "id": "561c749d-9fb7-4461-a6ee-ba60e5a7c36e",
+            "name": "CONDITIONING_1",
+            "type": "CONDITIONING",
+            "linkIds": [
+              62
+            ],
+            "localized_name": "条件_1",
+            "pos": [
+              1325.9581923617352,
+              -894.2696987213541
+            ]
+          },
+          {
+            "id": "fa1f0b1f-5ef9-4bd0-a3c4-066a69f03a28",
+            "name": "output",
+            "type": "INT",
+            "linkIds": [
+              58
+            ],
+            "label": "steps",
+            "pos": [
+              1325.9581923617352,
+              -874.2696987213541
+            ]
+          },
+          {
+            "id": "352d9601-bcf0-48e0-bf4f-765969e127c2",
+            "name": "output_1",
+            "type": "FLOAT",
+            "linkIds": [
+              59
+            ],
+            "label": "cfg",
+            "pos": [
+              1325.9581923617352,
+              -854.2696987213541
+            ]
+          }
+        ],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 15,
+            "type": "PrimitiveInt",
+            "pos": [
+              580.43649950195,
+              -1540.8377483994386
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "整数",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  32
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "PrimitiveInt"
+            },
+            "widgets_values": [
+              50,
+              "fixed"
+            ],
+            "widgets_values_named": {
+              "value": 50,
+              "fixed": "fixed"
+            }
+          },
+          {
+            "id": 16,
+            "type": "PrimitiveInt",
+            "pos": [
+              576.3343028078459,
+              -1396.7605257316857
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 1,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "整数",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  33
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "PrimitiveInt"
+            },
+            "widgets_values": [
+              8,
+              "fixed"
+            ],
+            "widgets_values_named": {
+              "value": 8,
+              "fixed": "fixed"
+            }
+          },
+          {
+            "id": 21,
+            "type": "PrimitiveFloat",
+            "pos": [
+              575.9213760135333,
+              -1124.2039415634113
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "浮点",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": [
+                  36
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "PrimitiveFloat"
+            },
+            "widgets_values": [
+              1
+            ],
+            "widgets_values_named": {
+              "value": 1
+            }
+          },
+          {
+            "id": 20,
+            "type": "ComfySwitchNode",
+            "pos": [
+              927.2289849383847,
+              -1195.402594109747
+            ],
+            "size": [
+              270,
+              78
+            ],
+            "flags": {},
+            "order": 8,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "为假时",
+                "name": "on_false",
+                "type": "FLOAT",
+                "link": 35
+              },
+              {
+                "localized_name": "为真时",
+                "name": "on_true",
+                "type": "FLOAT",
+                "link": 36
+              },
+              {
+                "localized_name": "切换",
+                "name": "switch",
+                "type": "BOOLEAN",
+                "widget": {
+                  "name": "switch"
+                },
+                "link": 37
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "输出",
+                "name": "output",
+                "type": "FLOAT",
+                "links": [
+                  59
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "ComfySwitchNode"
+            },
+            "widgets_values": [
+              false
+            ],
+            "widgets_values_named": {
+              "switch": false
+            }
+          },
+          {
+            "id": 19,
+            "type": "ComfySwitchNode",
+            "pos": [
+              925.5924402083762,
+              -1487.0715256177702
+            ],
+            "size": [
+              270,
+              78
+            ],
+            "flags": {},
+            "order": 7,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "为假时",
+                "name": "on_false",
+                "type": "INT",
+                "link": 32
+              },
+              {
+                "localized_name": "为真时",
+                "name": "on_true",
+                "type": "INT",
+                "link": 33
+              },
+              {
+                "localized_name": "切换",
+                "name": "switch",
+                "type": "BOOLEAN",
+                "widget": {
+                  "name": "switch"
+                },
+                "link": 34
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "输出",
+                "name": "output",
+                "type": "INT",
+                "links": [
+                  58
+                ]
+              }
+            ],
+            "title": "steps",
+            "properties": {
+              "Node name for S&R": "ComfySwitchNode"
+            },
+            "widgets_values": [
+              false
+            ],
+            "widgets_values_named": {
+              "switch": false
+            }
+          },
+          {
+            "id": 24,
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+              143.50507126436057,
+              -856.761747091288
+            ],
+            "size": [
+              330,
+              98
+            ],
+            "flags": {},
+            "order": 11,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "Checkpoint名称",
+                "name": "ckpt_name",
+                "type": "COMBO",
+                "widget": {
+                  "name": "ckpt_name"
+                },
+                "link": 55
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "模型",
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  38,
+                  41
+                ]
+              },
+              {
+                "localized_name": "CLIP",
+                "name": "CLIP",
+                "type": "CLIP",
+                "links": [
+                  43,
+                  44,
+                  45
+                ]
+              },
+              {
+                "localized_name": "VAE",
+                "name": "VAE",
+                "type": "VAE",
+                "links": [
+                  47
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "CheckpointLoaderSimple"
+            },
+            "widgets_values": [
+              "SenseNova-U1.5-8B-MoT-BF16-T8.safetensors"
+            ],
+            "widgets_values_named": {
+              "ckpt_name": "SenseNova-U1.5-8B-MoT-BF16-T8.safetensors"
+            }
+          },
+          {
+            "id": 22,
+            "type": "ComfySwitchNode",
+            "pos": [
+              923.1245402330173,
+              -932.9809369449489
+            ],
+            "size": [
+              270,
+              78
+            ],
+            "flags": {},
+            "order": 9,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "为假时",
+                "name": "on_false",
+                "type": "MODEL",
+                "link": 38
+              },
+              {
+                "localized_name": "为真时",
+                "name": "on_true",
+                "type": "MODEL",
+                "link": 39
+              },
+              {
+                "localized_name": "切换",
+                "name": "switch",
+                "type": "BOOLEAN",
+                "widget": {
+                  "name": "switch"
+                },
+                "link": 40
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "输出",
+                "name": "output",
+                "type": "MODEL",
+                "links": [
+                  42
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "ComfySwitchNode"
+            },
+            "widgets_values": [
+              false
+            ],
+            "widgets_values_named": {
+              "switch": false
+            }
+          },
+          {
+            "id": 25,
+            "type": "SenseNovaSamplingOptions",
+            "pos": [
+              929.0015934135625,
+              -1065.941935428701
+            ],
+            "size": [
+              259.81054955890795,
+              89.34562631574886
+            ],
+            "flags": {},
+            "order": 12,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 42
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "模型",
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  48
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "SenseNovaSamplingOptions"
+            },
+            "widgets_values": [
+              3
+            ],
+            "widgets_values_named": {
+              "shift": 3
+            }
+          },
+          {
+            "id": 17,
+            "type": "PrimitiveFloat",
+            "pos": [
+              576.8637362016708,
+              -1227.3644461111203
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 3,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "localized_name": "浮点",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": [
+                  35
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "PrimitiveFloat"
+            },
+            "widgets_values": [
+              4
+            ],
+            "widgets_values_named": {
+              "value": 4
+            }
+          },
+          {
+            "id": 18,
+            "type": "PrimitiveBoolean",
+            "pos": [
+              182.42262529033655,
+              -1167.1301829261204
+            ],
+            "size": [
+              270,
+              58
+            ],
+            "flags": {},
+            "order": 6,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "值",
+                "name": "value",
+                "type": "BOOLEAN",
+                "widget": {
+                  "name": "value"
+                },
+                "link": 67
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "布尔",
+                "name": "BOOLEAN",
+                "type": "BOOLEAN",
+                "links": [
+                  34,
+                  37,
+                  40
+                ]
+              }
+            ],
+            "title": "Turbo",
+            "properties": {
+              "Node name for S&R": "PrimitiveBoolean"
+            },
+            "widgets_values": [
+              false
+            ],
+            "widgets_values_named": {
+              "value": false
+            }
+          },
+          {
+            "id": 23,
+            "type": "LoraLoaderModelOnly",
+            "pos": [
+              168.67510346779028,
+              -998.8998761105689
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 10,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "模型",
+                "name": "model",
+                "type": "MODEL",
+                "link": 41
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "模型",
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  39
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "LoraLoaderModelOnly"
+            },
+            "widgets_values": [
+              "SenseNova-U1.5-8B-MoT-LoRA-8step-ComfyUI.safetensors",
+              1
+            ],
+            "widgets_values_named": {
+              "lora_name": "SenseNova-U1.5-8B-MoT-LoRA-8step-ComfyUI.safetensors",
+              "strength_model": 1
+            }
+          },
+          {
+            "id": 11,
+            "type": "SenseNovaTextEncode",
+            "pos": [
+              593.2038277088839,
+              -626.2717409384605
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "clip",
+                "name": "clip",
+                "type": "CLIP",
+                "link": 43
+              },
+              {
+                "localized_name": "text",
+                "name": "text",
+                "type": "STRING",
+                "widget": {
+                  "name": "text"
+                },
+                "link": 60
+              },
+              {
+                "localized_name": "thinking",
+                "name": "thinking",
+                "type": "BOOLEAN",
+                "widget": {
+                  "name": "thinking"
+                },
+                "link": 56
+              },
+              {
+                "localized_name": "max_think_tokens",
+                "name": "max_think_tokens",
+                "type": "INT",
+                "widget": {
+                  "name": "max_think_tokens"
+                },
+                "link": 57
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "条件",
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  61
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "SenseNovaTextEncode"
+            },
+            "widgets_values": [
+              "Change the jacket of the person on the left to bright yellow.",
+              "image",
+              1024,
+              1024
+            ],
+            "widgets_values_named": {
+              "text": "Change the jacket of the person on the left to bright yellow.",
+              "mode": "image",
+              "thinking": 1024,
+              "max_think_tokens": 1024
+            }
+          },
+          {
+            "id": 5,
+            "type": "CLIPTextEncode",
+            "pos": [
+              600.6981787699996,
+              -760.6036012528111
+            ],
+            "size": [
+              430,
+              110
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 4,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "clip",
+                "name": "clip",
+                "type": "CLIP",
+                "link": 45
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "条件",
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  62
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+              ""
+            ],
+            "widgets_values_named": {
+              "text": ""
+            }
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 41,
+            "origin_id": 24,
+            "origin_slot": 0,
+            "target_id": 23,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 35,
+            "origin_id": 17,
+            "origin_slot": 0,
+            "target_id": 20,
+            "target_slot": 0,
+            "type": "FLOAT"
+          },
+          {
+            "id": 36,
+            "origin_id": 21,
+            "origin_slot": 0,
+            "target_id": 20,
+            "target_slot": 1,
+            "type": "FLOAT"
+          },
+          {
+            "id": 37,
+            "origin_id": 18,
+            "origin_slot": 0,
+            "target_id": 20,
+            "target_slot": 2,
+            "type": "BOOLEAN"
+          },
+          {
+            "id": 32,
+            "origin_id": 15,
+            "origin_slot": 0,
+            "target_id": 19,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 33,
+            "origin_id": 16,
+            "origin_slot": 0,
+            "target_id": 19,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 34,
+            "origin_id": 18,
+            "origin_slot": 0,
+            "target_id": 19,
+            "target_slot": 2,
+            "type": "BOOLEAN"
+          },
+          {
+            "id": 42,
+            "origin_id": 22,
+            "origin_slot": 0,
+            "target_id": 25,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 38,
+            "origin_id": 24,
+            "origin_slot": 0,
+            "target_id": 22,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 39,
+            "origin_id": 23,
+            "origin_slot": 0,
+            "target_id": 22,
+            "target_slot": 1,
+            "type": "MODEL"
+          },
+          {
+            "id": 40,
+            "origin_id": 18,
+            "origin_slot": 0,
+            "target_id": 22,
+            "target_slot": 2,
+            "type": "BOOLEAN"
+          },
+          {
+            "id": 45,
+            "origin_id": 24,
+            "origin_slot": 1,
+            "target_id": 5,
+            "target_slot": 0,
+            "type": "CLIP"
+          },
+          {
+            "id": 43,
+            "origin_id": 24,
+            "origin_slot": 1,
+            "target_id": 11,
+            "target_slot": 0,
+            "type": "CLIP"
+          },
+          {
+            "id": 44,
+            "origin_id": 24,
+            "origin_slot": 1,
+            "target_id": -20,
+            "target_slot": 0,
+            "type": "CLIP"
+          },
+          {
+            "id": 47,
+            "origin_id": 24,
+            "origin_slot": 2,
+            "target_id": -20,
+            "target_slot": 1,
+            "type": "VAE"
+          },
+          {
+            "id": 48,
+            "origin_id": 25,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 2,
+            "type": "MODEL"
+          },
+          {
+            "id": 55,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 24,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 56,
+            "origin_id": -10,
+            "origin_slot": 2,
+            "target_id": 11,
+            "target_slot": 2,
+            "type": "BOOLEAN"
+          },
+          {
+            "id": 57,
+            "origin_id": -10,
+            "origin_slot": 3,
+            "target_id": 11,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 58,
+            "origin_id": 19,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 5,
+            "type": "INT"
+          },
+          {
+            "id": 59,
+            "origin_id": 20,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 6,
+            "type": "FLOAT"
+          },
+          {
+            "id": 60,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 11,
+            "target_slot": 1,
+            "type": "STRING"
+          },
+          {
+            "id": 61,
+            "origin_id": 11,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 3,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 62,
+            "origin_id": 5,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 67,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 18,
+            "target_slot": 0,
+            "type": "BOOLEAN"
+          }
+        ],
+        "extra": {}
+      }
+    ]
+  },
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.51.9",
+    "ds": {
+      "scale": 0.8987499183749846,
+      "offset": [
+        160.55959179126296,
+        519.3462521295617
+      ]
+    }
+  },
+  "version": 0.4
+}
