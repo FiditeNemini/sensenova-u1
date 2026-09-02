@@ -1,8 +1,8 @@
 {
   "id": "6e74ae7a-1fe6-4b80-991f-1e0efe583102",
   "revision": 0,
-  "last_node_id": 26,
-  "last_link_id": 67,
+  "last_node_id": 30,
+  "last_link_id": 69,
   "nodes": [
     {
       "id": 7,
@@ -46,8 +46,8 @@
       "id": 3,
       "type": "LoadImage",
       "pos": [
-        466.65283199685206,
-        79.65305592100319
+        117.91601613559982,
+        112.79212836983461
       ],
       "size": [
         330,
@@ -62,7 +62,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            25
+            68
           ]
         },
         {
@@ -97,7 +97,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 8,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -131,7 +131,7 @@
         106
       ],
       "flags": {},
-      "order": 3,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -148,7 +148,7 @@
           "name": "images.image_1",
           "shape": 7,
           "type": "IMAGE",
-          "link": 25
+          "link": 69
         },
         {
           "name": "images.image_2",
@@ -190,7 +190,7 @@
         270
       ],
       "flags": {},
-      "order": 4,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -274,7 +274,7 @@
         70
       ],
       "flags": {},
-      "order": 5,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -313,7 +313,7 @@
         74
       ],
       "flags": {},
-      "order": 6,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -362,7 +362,7 @@
         302
       ],
       "flags": {},
-      "order": 7,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -483,6 +483,77 @@
         "max_think_tokens": 1024,
         "value": false
       }
+    },
+    {
+      "id": 28,
+      "type": "ImageScaleToTotalPixels",
+      "pos": [
+        496.2407953969075,
+        112.80273042141158
+      ],
+      "size": [
+        270,
+        142
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            69
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        4,
+        32
+      ],
+      "widgets_values_named": {
+        "upscale_method": "lanczos",
+        "megapixels": 4,
+        "resolution_steps": 32
+      }
+    },
+    {
+      "id": 30,
+      "type": "MarkdownNote",
+      "pos": [
+        -0.2343202531332622,
+        -446.11486560214814
+      ],
+      "size": [
+        431.90625,
+        504.03125
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## Reference Image Resolution\n\nSenseNova-U1 image editing works best when reference images are resized before they are passed to **HiDream-O1 Reference Images**.\n\nConnect each reference image as follows:\n\n`Load Image → Scale Image to Total Pixels → HiDream-O1 Reference Images`\n\nRecommended resize settings:\n\n- **Upscale method:** `lanczos`\n- **Resolution steps:** `32`\n- **1–2 reference images:** `4.0 MP` per image\n- **More than 2 reference images:** share an `8.0 MP` total budget across all reference images\n\nFor `N > 2`, set each image to approximately:\n\n`8.0 / N MP`\n\nExamples:\n\n- 1 image: `4.0 MP`\n- 2 images: `4.0 MP` each\n- 3 images: `2.67 MP` each\n- 4 images: `2.0 MP` each\n\nThis resizing applies only to reference images. The generated image resolution is controlled separately by the latent width and height.\n\nThe shared budget limits the number of visual-prefix tokens and helps avoid excessive VRAM usage and slower inference."
+      ],
+      "widgets_values_named": {
+        "text": "## Reference Image Resolution\n\nSenseNova-U1 image editing works best when reference images are resized before they are passed to **HiDream-O1 Reference Images**.\n\nConnect each reference image as follows:\n\n`Load Image → Scale Image to Total Pixels → HiDream-O1 Reference Images`\n\nRecommended resize settings:\n\n- **Upscale method:** `lanczos`\n- **Resolution steps:** `32`\n- **1–2 reference images:** `4.0 MP` per image\n- **More than 2 reference images:** share an `8.0 MP` total budget across all reference images\n\nFor `N > 2`, set each image to approximately:\n\n`8.0 / N MP`\n\nExamples:\n\n- 1 image: `4.0 MP`\n- 2 images: `4.0 MP` each\n- 3 images: `2.67 MP` each\n- 4 images: `2.0 MP` each\n\nThis resizing applies only to reference images. The generated image resolution is controlled separately by the latent width and height.\n\nThe shared budget limits the number of visual-prefix tokens and helps avoid excessive VRAM usage and slower inference."
+      },
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -508,14 +579,6 @@
       0,
       10,
       0,
-      "IMAGE"
-    ],
-    [
-      25,
-      3,
-      0,
-      12,
-      2,
       "IMAGE"
     ],
     [
@@ -613,6 +676,22 @@
       8,
       5,
       "FLOAT"
+    ],
+    [
+      68,
+      3,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      69,
+      28,
+      0,
+      12,
+      2,
+      "IMAGE"
     ]
   ],
   "groups": [],
@@ -623,8 +702,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 0,
-          "lastNodeId": 26,
-          "lastLinkId": 67,
+          "lastNodeId": 30,
+          "lastLinkId": 69,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1651,10 +1730,10 @@
   "extra": {
     "frontendVersion": "1.51.9",
     "ds": {
-      "scale": 0.8987499183749846,
+      "scale": 0.9339138404565794,
       "offset": [
-        160.55959179126296,
-        519.3462521295617
+        298.8719476429893,
+        804.5753153984404
       ]
     }
   },
